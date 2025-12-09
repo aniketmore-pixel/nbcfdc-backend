@@ -6,6 +6,7 @@ const applicationRoutes = require("./routes/applicationRoutes.js");
 const Income_And_Assetdetails_Route = require("./routes/Income_And_Assetdetails_Route.js");
 const bankDetailsRoute = require("./routes/Bank_Details_Route");
 const loanDetailsRoute = require("./routes/Loan_Details_Route");
+const path = require("path");
 
 require("dotenv").config();
 const express = require("express");
@@ -391,9 +392,15 @@ app.use("/api", loanDetailsRoute);
 
 
 
-app.get("*", (req, res) => {
-  res.sendFile(path.join(__dirname, "public/dist/index.html"));
+// app.get("*", (req, res) => {
+//   res.sendFile(path.join(__dirname, "public/dist/index.html"));
+// });
+
+// Serve frontend (catch-all route)
+app.get("/*", (req, res) => {
+  res.sendFile(path.join(__dirname, "public", "dist", "index.html"));
 });
+
 
 const aadhaarRoutes = require("./routes/aadhaar.js");
 app.use("/api/auth", aadhaarRoutes);
